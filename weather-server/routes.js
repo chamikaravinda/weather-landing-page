@@ -2,6 +2,25 @@ const { API_URL, API_ENDPOINT, API_KEY,FILE } = require( "./constant");
 const axios =require("axios");
 const router = require('express').Router();
 const fs = require("fs");
+const mcache = require('memory-cache');
+
+const cache = (duration) => {
+    return (req, res, next) => {
+      let key = '__express__' + req.originalUrl || req.url
+      let cachedBody = mcache.get(key)
+      if (cachedBody) {
+        res.send(cachedBody)
+        return
+      } else {
+        res.sendResponse = res.send
+        res.send = (body) => {
+          mcache.put(key, body, duration * 1000);
+          res.sendResponse(body)
+        }
+        next()
+      }
+    }
+}
 
 let city =  fs.readFileSync(FILE, "utf8", (err) => {
     if (err) { 
@@ -11,7 +30,7 @@ let city =  fs.readFileSync(FILE, "utf8", (err) => {
 city = JSON.parse(city);
 
 
-router.get('/get-all',async (req,res) =>{
+router.get('/get-all',cache(5),async (req,res) =>{
 
     let cities = "";
 

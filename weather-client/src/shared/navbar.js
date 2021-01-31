@@ -3,7 +3,7 @@ import {MDBNavbar,MDBNavbarBrand,} from "mdbreact";
 
 const Navbar = (props) => {
        return(
-         <MDBNavbar color="danger-color" dark expand="md">
+         <MDBNavbar color="info-color" dark expand="md">
             <MDBNavbarBrand>
                 <strong className="white-text">Weather Dashboard</strong>
             </MDBNavbarBrand>

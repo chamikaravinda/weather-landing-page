@@ -26,7 +26,7 @@ const Card = (props) => {
                 </MDBRow>
             </MDBCardBody>
             <p className="font-weight-normal text-right pr-1" style={{fontSize:"12px"}}>ID: {props.data.id}</p>
-            <div className='rounded-bottom mdb -color danger-color text-left pt-1 pl-1'>
+            <div className='rounded-bottom mdb-color info-color text-left pt-1 pl-1'>
                 <p style={{fontSize:"12px"}}><MDBIcon far icon='clock' /> Last Update : {updateString} {differentString}</p>
             </div>
             </MDBCard>
